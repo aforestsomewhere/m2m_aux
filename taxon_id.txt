@@ -1,3 +1,0 @@
-species	taxon_id
-strain_1	1597
-strain_2	146474

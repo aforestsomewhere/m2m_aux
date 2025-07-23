@@ -1,10 +1,15 @@
 #!/bin/bash
 
+# Convert any .gbff files to .gbk for standardisation
+for file in *.gbk; do
+  filename="${file%.gbff}"
+  python convert_gbff_gbk.py "$filename.gbff" "$filename.gbk"
+done
+
 # Loop through each .gbk file in the current directory
 for file in *.gbk; do
-  # Remove the .gbff suffix from the filename to get the directory name
+  # Remove the .gbk suffix from the filename to get the directory name
   dirname="${file%.gbk}"
-  
   # Create the directory
   mkdir -p "$dirname"
   
@@ -13,3 +18,6 @@ for file in *.gbk; do
   #ln -s "$dirname"/"$dirname".gbff "$dirname".gbff
   mv *"$dirname"* "$dirname"
 done
+
+#Add db_xref taxon id information to .gbk files
+python add_dbxref.py
